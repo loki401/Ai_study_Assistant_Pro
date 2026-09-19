@@ -3,6 +3,7 @@ import json
 import streamlit as st
 from dotenv import load_dotenv, find_dotenv
 from google import genai
+from google.genai import types
 
 # Attempt loading from local .env if available
 load_dotenv(find_dotenv(usecwd=True), override=True)
@@ -19,6 +20,8 @@ if not raw_key:
 
 api_key = str(raw_key).strip()
 client = genai.Client(api_key=api_key)
+
+MODEL_NAME = "gemini-2.0-flash"
 
 def generate_rag_answer(question: str, retrieved_contexts: list, language: str = "English") -> str:
     """Answers a question grounded strictly in the retrieved excerpts."""
@@ -45,7 +48,7 @@ Question:
 """
 
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model=MODEL_NAME,
         contents=prompt
     )
     return response.text
@@ -67,8 +70,8 @@ Excerpts:
 {context_str}
 """
 
-   response = client.models.generate_content(
-        model="gemini-2.5-flash",
+    response = client.models.generate_content(
+        model=MODEL_NAME,
         contents=prompt
     )
     return response.text
@@ -101,12 +104,12 @@ Context:
 
     try:
         response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt,
-        config={
-            "response_mime_type": "application/json"
-        }
-    )
+            model=MODEL_NAME,
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json"
+            )
+        )
         data = json.loads(response.text)
         if isinstance(data, dict) and "nodes" in data and "edges" in data:
             return data

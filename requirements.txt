@@ -6,4 +6,5 @@ PyMuPDF
 pyspellchecker
 transformers
 torch
+torchvision
 pyvis
