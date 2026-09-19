@@ -1,0 +1,9 @@
+streamlit
+google-genai
+python-dotenv
+chromadb
+PyMuPDF
+pyspellchecker
+transformers
+torch
+pyvis

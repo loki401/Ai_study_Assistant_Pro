@@ -1,0 +1,24 @@
+import java.util.Scanner;
+class loki2{
+public staatic void main(String[] args()){
+Scanner sc=new Scanner(System.in);
+System.out.println("enter the size of the array:);
+int n=sc.nextInt();
+int []a=new int[n];
+System.out.println("enter the elements inside array:);
+{
+for(i=0;i<n;i++){
+a[i]=sc.nextInt();
+}
+System.out.println("enter the size of the array 2:);
+int n2=sc.nextInt();
+int[] b=new int[n2];
+System.out.println("enter the elements insude the array:);
+for(j=0;j<n2:j++){
+b[j]=sc.nextInt();
+System.out.println("enter merge of two array is:" +a[i]+b[j]);
+}
+
+}
+}
+}
