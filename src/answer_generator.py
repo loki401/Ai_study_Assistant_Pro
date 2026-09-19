@@ -21,7 +21,7 @@ if not raw_key:
 api_key = str(raw_key).strip()
 client = genai.Client(api_key=api_key)
 
-MODEL_NAME = "gemini-2.0-flash"
+MODEL_NAME = "gemini-3.6-flash"
 
 def generate_rag_answer(question: str, retrieved_contexts: list, language: str = "English") -> str:
     """Answers a question grounded strictly in the retrieved excerpts."""
