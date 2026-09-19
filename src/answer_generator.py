@@ -45,7 +45,7 @@ Question:
 """
 
     response = client.models.generate_content(
-        model="gemini-3.6-flash",
+        model="gemini-2.5-flash",
         contents=prompt
     )
     return response.text
@@ -67,8 +67,8 @@ Excerpts:
 {context_str}
 """
 
-    response = client.models.generate_content(
-        model="gemini-3.6-flash",
+   response = client.models.generate_content(
+        model="gemini-2.5-flash",
         contents=prompt
     )
     return response.text
@@ -101,12 +101,12 @@ Context:
 
     try:
         response = client.models.generate_content(
-            model="gemini-3.6-flash",
-            contents=prompt,
-            config={
-                "response_mime_type": "application/json"
-            }
-        )
+        model="gemini-2.5-flash",
+        contents=prompt,
+        config={
+            "response_mime_type": "application/json"
+        }
+    )
         data = json.loads(response.text)
         if isinstance(data, dict) and "nodes" in data and "edges" in data:
             return data
