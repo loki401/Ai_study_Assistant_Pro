@@ -8,12 +8,15 @@ from google.genai import types
 # Attempt loading from local .env if available
 load_dotenv(find_dotenv(usecwd=True), override=True)
 
-# 1. Retrieve the API key: check Streamlit Cloud Secrets first, fallback to os.getenv
-raw_key = None
-if hasattr(st, "secrets") and "GEMINI_API_KEY" in st.secrets:
-    raw_key = st.secrets["GEMINI_API_KEY"]
-else:
-    raw_key = os.getenv("GEMINI_API_KEY")
+# 1. Retrieve the API key safely across both local and Streamlit Cloud environments
+raw_key = os.getenv("GEMINI_API_KEY")
+
+if not raw_key:
+    try:
+        if "GEMINI_API_KEY" in st.secrets:
+            raw_key = st.secrets["GEMINI_API_KEY"]
+    except Exception:
+        pass
 
 if not raw_key:
     raise ValueError("GEMINI_API_KEY not found! Configure it in Streamlit Cloud Secrets or your local .env.")
